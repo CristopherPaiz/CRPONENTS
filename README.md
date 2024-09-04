@@ -2,6 +2,14 @@
 
 Esta es una plantilla personalizada para proyectos de React, diseñada para proporcionar una estructura base sólida y componentes reutilizables. Incluye configuraciones para CSS y Tailwind, optimizada para un desarrollo rápido y eficiente, proyecto simple que incluye las cosas más comunes que necesitas para comenzar a construir tu aplicación.
 
+## Inicio rápido
+
+Para crear un nuevo proyecto usando esta plantilla:
+
+```bash
+git clone https://github.com/CristopherPaiz/CRPONENTS.git
+```
+
 ## Características
 
 - 🚀 Configuración de Vite para un desarrollo rápido
@@ -30,14 +38,6 @@ Esta es una plantilla personalizada para proyectos de React, diseñada para prop
 
 - Node.js (versión 14 o superior)
 - npm o yarn
-
-## Inicio rápido
-
-Para crear un nuevo proyecto usando esta plantilla:
-
-```bash
-git clone https://github.com/CristopherPaiz/CRPONENTS.git
-```
 
 ## Estructura del proyecto
 
