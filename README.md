@@ -1,4 +1,4 @@
-# Mi Plantilla Personalizada de React
+# CRPONENTS - Plantilla de React con componentes reutilizables
 
 Esta es una plantilla personalizada para proyectos de React, diseñada para proporcionar una estructura base sólida y componentes reutilizables. Incluye configuraciones para CSS y Tailwind, optimizada para un desarrollo rápido y eficiente, proyecto simple que incluye las cosas más comunes que necesitas para comenzar a construir tu aplicación.
 
