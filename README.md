@@ -20,11 +20,12 @@ git clone https://github.com/CristopherPaiz/CRPONENTS.git
 
 ## Componentes incluidos
 
+- CRInput
+- CRDate
 - CRAlert
 - CRButton
 - CRCard
 - CRCheckbox
-- CRInput
 - CRModal
 - CRRadio
 - CRSelect
