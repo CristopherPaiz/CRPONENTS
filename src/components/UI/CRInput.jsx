@@ -39,7 +39,7 @@ const CRInput = ({ title, className, type, placeholder, maxLength, disabled, set
   };
 
   const baseStyle =
-    "bg-white dark:bg-slate-800/50 text-black dark:text-white block w-full px-3 py-2 border border-gray-300 dark:border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500";
+    "bg-white dark:bg-neutral-800/50 text-black dark:text-white block w-full px-3 py-2 border border-gray-300 dark:border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500";
   const errorStyle = "border-red-500 focus:ring-red-500 focus:border-red-500 text-red-500 dark:text-red-400";
   const disabledStyle = "opacity-50 dark:opacity-30 cursor-not-allowed";
   const inputPaddingRight = maxLength > 100 ? "pr-14" : "pr-11"; // Reserve space for the counter

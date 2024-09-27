@@ -17,8 +17,8 @@ const App = () => {
           {theme === "light" ? "🌙" : "☀️"}
         </button>
 
-        <CRInput title="Nombre" placeholder="sotz" setValue={setPrueba} reset={resetear} maxLength={50} />
-        <CRDate title="Fecha" setValue={setPrueba} reset={resetear} />
+        <CRInput title="Nombre" placeholder="sotz" setValue={setPrueba} disabled reset={resetear} maxLength={50} />
+        <CRDate title="Fecha" setValue={setPrueba} reset={resetear} disabled />
 
         {/* ############# PARA LAS PRUEBAS ############# */}
 

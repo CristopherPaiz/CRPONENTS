@@ -224,7 +224,12 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
   return (
     <div className="relative">
       {title && (
-        <label htmlFor="CRInput" className={`block text-sm font-medium mb-2 ${error ? "text-red-500" : "text-gray-700"}`}>
+        <label
+          htmlFor="CRInput"
+          className={`text-black dark:text-white block text-sm font-medium mb-2 ${
+            error ? "text-red-500 dark:text-red-400" : disabled ? "text-gray-400 dark:text-gray-500" : ""
+          }`}
+        >
           {title}
         </label>
       )}
@@ -234,12 +239,14 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
         value={selectedDate ? formatDateForDisplay(selectedDate) : ""}
         onClick={togglePopup}
         placeholder={placeholder ? placeholder : locale === "es" ? "Seleccionar fecha" : "Select date"}
-        className={`block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
-          disabled ? "bg-gray-200 cursor-default text-black/50" : "cursor-pointer"
-        } ${error ? "border-red-500 bg-red-100 text-red-500" : "text-black"}`}
+        className={`bg-white dark:bg-neutral-800/50 text-black dark:text-white block w-full px-3 py-2 border border-gray-300 dark:border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+          disabled
+            ? "bg-neutral-200 cursor-not-allowed text-black/50 dark:bg-neutral-800/50 dark:text-white/30 dark:border-gray-300/20 "
+            : "cursor-pointer"
+        } ${error ? "border-red-500 bg-red-100 text-red-500 dark:text-red-400" : "text-black"}`}
         disabled={disabled}
       />
-      {error && <p className="text-red-500 text-base">{error}</p>}
+      {error && <p className="text-base text-red-500 dark:text-red-400 mt-1">{error}</p>}
 
       {isPopupOpen && (
         <div
@@ -248,9 +255,7 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
             position: "absolute",
             ...StyleCalendar[position === "top" ? "popupTop" : position === "bottom" ? "popupBottom" : position === "right" ? "popupRight" : "popupLeft"],
           }}
-          className={`absolute bg-white dark:bg-slate-700 mt-2 w-80 p-4 border ${
-            error ? "border-red-500" : "border-gray-300"
-          } bg-white rounded-lg shadow-lg z-10 ${position}`}
+          className={`absolute bg-white dark:bg-neutral-700 text-black dark:text-white mt-2 w-80 p-4 border rounded-lg shadow-lg z-10 ${position}`}
         >
           <div className="flex justify-between mb-4">
             <button className="p-2 bg-blue-500 w-[150px] font-bold text-white rounded-lg" onClick={() => setView("months")}>
