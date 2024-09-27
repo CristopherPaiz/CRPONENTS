@@ -22,18 +22,22 @@ git clone https://github.com/CristopherPaiz/CRPONENTS.git
 
 - CRInput
 - CRDate
-- CRAlert
 - CRButton
-- CRCard
-- CRCheckbox
-- CRModal
-- CRRadio
 - CRSelect
+
+- CRCheckbox
+- CRRadio
 - CRSwitch
-- CRTable
-- CRTabs
+
+- CRAlert
 - CRToast
 - CRTooltip
+
+- CRModal
+- CRCard
+
+- CRTable
+- CRTabs
 
 ## Requisitos previos
 
