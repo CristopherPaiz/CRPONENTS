@@ -36,11 +36,6 @@ const CRInput = ({ title, className, type, placeholder, maxLength, disabled, set
     setInputValue(newValue);
     setValue(newValue);
     setCharCount(newValue.length);
-
-    // Clear the error if input changes
-    if (error) {
-      props.onClearError();
-    }
   };
 
   const baseStyle =
@@ -106,7 +101,6 @@ CRInput.propTypes = {
   reset: PropTypes.any,
   autoComplete: PropTypes.bool,
   error: PropTypes.string,
-  onClearError: PropTypes.func,
 };
 
 export default CRInput;
