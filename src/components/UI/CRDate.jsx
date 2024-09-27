@@ -248,7 +248,9 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
             position: "absolute",
             ...StyleCalendar[position === "top" ? "popupTop" : position === "bottom" ? "popupBottom" : position === "right" ? "popupRight" : "popupLeft"],
           }}
-          className={`absolute mt-2 w-80 p-4 border ${error ? "border-red-500" : "border-gray-300"} bg-white rounded-lg shadow-lg z-10 ${position}`}
+          className={`absolute bg-white dark:bg-slate-700 mt-2 w-80 p-4 border ${
+            error ? "border-red-500" : "border-gray-300"
+          } bg-white rounded-lg shadow-lg z-10 ${position}`}
         >
           <div className="flex justify-between mb-4">
             <button className="p-2 bg-blue-500 w-[150px] font-bold text-white rounded-lg" onClick={() => setView("months")}>

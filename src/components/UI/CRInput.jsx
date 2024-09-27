@@ -16,9 +16,9 @@ const CRInput = ({ title, className, type, placeholder, maxLength, disabled, set
 
   useEffect(() => {
     if (charCount === maxLength) {
-      setCounterClass("text-yellow-500 scale-125");
+      setCounterClass("text-yellow-600 dark:text-yellow-500 scale-125");
       setTimeout(() => {
-        setCounterClass("text-yellow-500 scale-100");
+        setCounterClass("text-yellow-600 dark:text-yellow-500 scale-100");
       }, 200);
     } else {
       setCounterClass("");
@@ -44,15 +44,20 @@ const CRInput = ({ title, className, type, placeholder, maxLength, disabled, set
   };
 
   const baseStyle =
-    "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm";
-  const errorStyle = "border-red-500 focus:ring-red-500 focus:border-red-500 text-red-500";
-  const disabledStyle = "bg-gray-100 cursor-not-allowed";
+    "bg-white dark:bg-slate-800/50 text-black dark:text-white block w-full px-3 py-2 border border-gray-300 dark:border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500";
+  const errorStyle = "border-red-500 focus:ring-red-500 focus:border-red-500 text-red-500 dark:text-red-400";
+  const disabledStyle = "opacity-50 dark:opacity-30 cursor-not-allowed";
   const inputPaddingRight = maxLength > 100 ? "pr-14" : "pr-11"; // Reserve space for the counter
 
   return (
-    <div className={`py-2 ${error ? "text-red-500" : ""}`}>
+    <div className={`py-2 ${error ? "text-red-500 dark:text-red-400" : ""}`}>
       {title && (
-        <label htmlFor="CRInput" className={`block text-sm font-medium mb-2 ${error ? "text-red-500" : "text-gray-700"}`}>
+        <label
+          htmlFor="CRInput"
+          className={`text-black dark:text-white block text-sm font-medium mb-2 ${
+            error ? "text-red-500 dark:text-red-400" : disabled ? "text-gray-400 dark:text-gray-500" : ""
+          }`}
+        >
           {title}
         </label>
       )}
@@ -72,13 +77,17 @@ const CRInput = ({ title, className, type, placeholder, maxLength, disabled, set
         />
 
         {maxLength && (
-          <div className={`absolute right-2 bottom-[11px] text-xs transition-transform duration-200 ${counterClass}`}>
+          <div
+            className={`absolute right-2 bottom-[11px] text-xs transition-transform duration-200 text-black dark:text-white ${counterClass} ${
+              disabled ? "text-gray-400 dark:text-gray-500" : ""
+            }`}
+          >
             {charCount}/{maxLength}
           </div>
         )}
       </div>
       {/* Show error message below the input */}
-      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+      {error && <p className="text-xs text-red-500 dark:text-red-400 mt-1">{error}</p>}
     </div>
   );
 };
@@ -97,7 +106,7 @@ CRInput.propTypes = {
   reset: PropTypes.any,
   autoComplete: PropTypes.bool,
   error: PropTypes.string,
-  onClearError: PropTypes.func.isRequired,
+  onClearError: PropTypes.func,
 };
 
 export default CRInput;
