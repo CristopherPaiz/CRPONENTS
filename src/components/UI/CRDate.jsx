@@ -148,7 +148,7 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
             <div
               key={`day-${day}`}
               className={`h-10 w-10 flex items-center justify-center cursor-pointer rounded-full
-                ${isSelected ? "bg-blue-500 text-white" : "hover:bg-blue-200"}`}
+                ${isSelected ? "bg-blue-500 text-white" : "hover:bg-blue-200 dark:hover:bg-blue-900"}`}
               onClick={() => handleSelectDay(day)}
             >
               {day}
@@ -166,7 +166,7 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
           <div
             key={month}
             className={`p-2 text-center text-sm cursor-pointer rounded-lg
-              ${currentMonth === index ? "bg-blue-500 text-white" : "hover:bg-blue-200"}`}
+              ${currentMonth === index ? "bg-blue-500 text-white" : "hover:bg-blue-200 dark:hover:bg-blue-900"}`}
             onClick={() => handleSelectMonth(index)}
           >
             {month}
@@ -199,7 +199,7 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
             <div
               key={year}
               className={`p-2 text-center cursor-pointer rounded-lg
-              ${currentYear === year ? "bg-blue-500 text-white" : "hover:bg-blue-200"}`}
+              ${currentYear === year ? "bg-blue-500 text-white" : "hover:bg-blue-200 dark:hover:bg-blue-900"}`}
               onClick={() => handleSelectYear(year)}
             >
               {year}
