@@ -82,7 +82,7 @@ const CRInput = ({ title, className, type, placeholder, maxLength, disabled, set
         )}
       </div>
       {/* Show error message below the input */}
-      {error && <p className="text-xs text-red-500 dark:text-red-400 mt-1">{error}</p>}
+      {error && <p className="text-xs text-red-500 dark:text-red-400 my-1">{error}</p>}
     </div>
   );
 };

@@ -241,12 +241,12 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
         placeholder={placeholder ? placeholder : locale === "es" ? "Seleccionar fecha" : "Select date"}
         className={`bg-white dark:bg-neutral-800/50 text-black dark:text-white block w-full px-3 py-2 border border-gray-300 dark:border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
           disabled
-            ? "bg-neutral-200 cursor-not-allowed text-black/50 dark:bg-neutral-800/50 dark:text-white/30 dark:border-gray-300/20 "
+            ? "bg-white cursor-not-allowed text-black/50 dark:bg-neutral-800/50 dark:text-white/50 dark:border-gray-300/20  opacity-50"
             : "cursor-pointer"
-        } ${error ? "border-red-500 bg-red-100 text-red-500 dark:text-red-400" : "text-black"}`}
+        } ${error ? "border-red-500 text-red-500 dark:text-red-400" : "text-black"}`}
         disabled={disabled}
       />
-      {error && <p className="text-base text-red-500 dark:text-red-400 mt-1">{error}</p>}
+      {error && <p className="text-base text-red-500 dark:text-red-400 my-1">{error}</p>}
 
       {isPopupOpen && (
         <div
