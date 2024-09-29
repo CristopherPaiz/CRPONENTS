@@ -14,12 +14,12 @@ const dayNames = {
 const StyleCalendar = {
   popupTop: {
     top: "-350px",
-    left: "0",
+    left: "-50px",
     transform: "translateX(0)",
   },
   popupBottom: {
     top: "100%",
-    left: "0",
+    left: "-50px",
     transform: "translateX(0)",
   },
   popupRight: {
@@ -128,6 +128,7 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     const firstDay = new Date(currentYear, currentMonth, 1).getDay();
     const emptyDays = Array(firstDay).fill(null);
+    const today = new Date();
 
     return (
       <div className="grid grid-cols-7 gap-1">
@@ -143,12 +144,14 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
           const day = index + 1;
           const isSelected =
             selectedDate && selectedDate.getDate() === day && selectedDate.getMonth() === currentMonth && selectedDate.getFullYear() === currentYear;
+          const isToday = today.getDate() === day && today.getMonth() === currentMonth && today.getFullYear() === currentYear;
 
           return (
             <div
               key={`day-${day}`}
               className={`h-10 w-10 flex items-center justify-center cursor-pointer rounded-full
-                ${isSelected ? "bg-blue-500 text-white" : "hover:bg-blue-200 dark:hover:bg-blue-900"}`}
+                ${isSelected ? "bg-blue-500 text-white" : "hover:bg-blue-200 dark:hover:bg-blue-900"}
+                ${isToday ? "border-2 border-blue-500" : ""}`}
               onClick={() => handleSelectDay(day)}
             >
               {day}
