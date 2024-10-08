@@ -1,8 +1,8 @@
 import { useState } from "react";
-import CRDate from "../UI/CRDate";
 import "../styles/index.css";
 import CRInput from "../UI/CRInput";
 import { useTheme } from "../../context/ThemeProvider";
+import CRDate from "../UI/CRDate";
 
 const App = () => {
   const [prueba, setPrueba] = useState("");

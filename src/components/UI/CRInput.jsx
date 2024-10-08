@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
  * @param {function} props.setValue - Función que actualiza el valor del campo.
  * @param {string | number} [props.value] - El valor actual del campo.
  * @param {string | number} [props.defaultValue] - El valor inicial del campo.
- * @param {any} [props.reset] - Propiedad que cuando cambia, reinicia el valor del campo al valor predeterminado. No importa si es true o false, solo importa que cambie.
+ * @param {boolean} [props.reset] - Propiedad que cuando cambia, reinicia el valor del campo al valor predeterminado. No importa si es true o false, solo importa que cambie.
  * @param {boolean} [props.autoComplete] - Si el autocompletado está habilitado o no.
  * @param {string} [props.error] - Mensaje de error a mostrar debajo del campo.
  *
