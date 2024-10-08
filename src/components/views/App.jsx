@@ -3,6 +3,7 @@ import "../styles/index.css";
 import CRInput from "../UI/CRInput";
 import { useTheme } from "../../context/ThemeProvider";
 import CRDate from "../UI/CRDate";
+import CRButton from "../UI/CRButton";
 
 const App = () => {
   const [prueba, setPrueba] = useState("");
@@ -19,6 +20,7 @@ const App = () => {
 
         <CRInput title="Nombre" placeholder="sotz" setValue={setPrueba} reset={resetear} maxLength={50} />
         <CRDate title="Fecha" setValue={setPrueba} reset={resetear} />
+        <CRButton title="Resetear" onClick={() => setResetear(!resetear)} />
 
         {/* ############# PARA LAS PRUEBAS ############# */}
 
@@ -27,10 +29,6 @@ const App = () => {
             {prueba}, {resetear ? "true" : "false"}
           </p>
         )}
-
-        <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => setResetear(!resetear)}>
-          reset
-        </button>
       </div>
     </div>
   );
