@@ -1,6 +1,27 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
+/**
+ * CRInput es un componente de campo de entrada personalizado que soporta diferentes tipos de entradas (texto, número, email, etc.)
+ * y ofrece funcionalidades como contador de caracteres, límite de longitud, y la capacidad de restablecer el valor.
+ *
+ * @param {Object} props - Las propiedades del componente si hay más\n Depende de lo que se quiera extender.
+ * @param {string} [props.title] - El título que aparece como etiqueta sobre el campo de entrada. Si no se incluye no aparecerá nada.
+ * @param {string} [props.className] - Clases TAILWIND adicionales para personalizar de forma limitada el estilo del campo.
+ * @param {"text" | "number" | "email" | "tel" | "password"} [props.type] - El tipo de campo de entrada (texto, número, email, etc.).
+ * @param {string} [props.placeholder] - Texto que aparece cuando el campo está vacío.
+ * @param {number} [props.maxLength] - La cantidad máxima de caracteres permitidos en el campo. Si está presente, se mostrará un contador de caracteres que tendrá una animación cuando llegue al límite.
+ * @param {boolean} [props.disabled] - Si el campo está deshabilitado.
+ * @param {function} props.setValue - Función que actualiza el valor del campo.
+ * @param {string | number} [props.value] - El valor actual del campo.
+ * @param {string | number} [props.defaultValue] - El valor inicial del campo.
+ * @param {any} [props.reset] - Propiedad que cuando cambia, reinicia el valor del campo al valor predeterminado. No importa si es true o false, solo importa que cambie.
+ * @param {boolean} [props.autoComplete] - Si el autocompletado está habilitado o no.
+ * @param {string} [props.error] - Mensaje de error a mostrar debajo del campo.
+ *
+ * @returns {JSX.Element} El campo de entrada con su funcionalidad asociada.
+ */
+
 const CRInput = ({ title, className, type, placeholder, maxLength, disabled, setValue, value, defaultValue, reset, autoComplete, error, ...props }) => {
   const [inputValue, setInputValue] = useState(defaultValue || value || "");
   const [charCount, setCharCount] = useState(0);

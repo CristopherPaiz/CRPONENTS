@@ -1,6 +1,28 @@
 import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
+/**
+ * El componente CRDate permite a los usuarios seleccionar una fecha a través de una interfaz de calendario emergente. Compatible con varios SO como Windows, Android y iOS.
+ *
+ * @componente
+ *
+ * @param {Object} props - Las propiedades del componente.
+ * @param {"es"|"en"} [props.locale="es"] - El idioma para los nombres de meses y días. Por defecto es "es" (español). pero si se incluye el "en" se utilizará el inglés, las traducciones vienen predefinidas.
+ * @param {string} [props.title] - El título que aparece como etiqueta sobre el campo de entrada. Si no se incluye no aparecerá nada.
+ * @param {Function} props.setValue - Función para establecer el valor de la fecha seleccionada en el componente padre.
+ * @param {string} [props.value] - El valor actual de la fecha en formato "YYYY-MM-DD".
+ * @param {string} [props.defaultValue] - Valor por defecto de la fecha, si no se proporciona uno.
+ * @param {boolean} [props.disabled=false] - Si es verdadero, desactiva el campo de entrada e impide la interacción.
+ * @param {boolean} [props.reset] - Propiedad que cuando cambia, reinicia el valor del campo al valor predeterminado. No importa si es true o false, solo importa que cambie.
+ * @param {"top"|"bottom"|"right"|"left"} [props.position="bottom"] - Posición del calendario emergente en relación con el campo de entrada.
+ * @param {string} [props.error] - Mensaje de error para mostrar debajo del campo de entrada.
+ * @param {string} [props.placeholder] - Texto del marcador de posición para el campo de entrada cuando no se ha seleccionado ninguna fecha.
+ * @param {string} [props.classNameInput] - Clases TAILWIND adicionales para el estilo del campo de entrada.
+ * @param {string} [props.classNameBox] - Clases TAILWIND adicionales para el estilo del cuadro del calendario emergente.
+ *
+ * @returns {JSX.Element} El componente CRDate.
+ */
+
 const monthNames = {
   es: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
   en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
