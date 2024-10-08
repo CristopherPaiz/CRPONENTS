@@ -34,7 +34,20 @@ const StyleCalendar = {
   },
 };
 
-const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled = false, reset, position = "bottom", error = "", placeholder }) => {
+const CRDate = ({
+  locale = "es",
+  title,
+  setValue,
+  value,
+  defaultValue,
+  disabled = false,
+  reset,
+  position = "bottom",
+  error = "",
+  placeholder,
+  classNameInput,
+  classNameBox,
+}) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -246,7 +259,7 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
           disabled
             ? "bg-white cursor-not-allowed text-black/50 dark:bg-neutral-800/50 dark:text-white/50 dark:border-gray-300/20  opacity-50"
             : "cursor-pointer"
-        } ${error ? "border-red-500 text-red-500 dark:text-red-400" : "text-black"}`}
+        } ${error ? "border-red-500 text-red-500 dark:text-red-400" : "text-black"} ${classNameInput}`}
         disabled={disabled}
       />
       {error && <p className="text-base text-red-500 dark:text-red-400 my-1">{error}</p>}
@@ -258,7 +271,7 @@ const CRDate = ({ locale = "es", title, setValue, value, defaultValue, disabled 
             position: "absolute",
             ...StyleCalendar[position === "top" ? "popupTop" : position === "bottom" ? "popupBottom" : position === "right" ? "popupRight" : "popupLeft"],
           }}
-          className={`absolute bg-white dark:bg-neutral-700 text-black dark:text-white mt-2 w-80 p-4 border rounded-lg shadow-lg z-10 ${position}`}
+          className={`absolute bg-white dark:bg-neutral-700 text-black dark:text-white mt-2 w-80 p-4 border rounded-lg shadow-lg z-10 ${position} ${classNameBox}`}
         >
           <div className="flex justify-between mb-4">
             <button className="p-2 bg-blue-500 w-[150px] font-bold text-white rounded-lg" onClick={() => setView("months")}>
@@ -291,6 +304,8 @@ CRDate.propTypes = {
   position: PropTypes.oneOf(["top", "bottom", "right", "left"]),
   error: PropTypes.string,
   placeholder: PropTypes.string,
+  classNameInput: PropTypes.string,
+  classNameBox: PropTypes.string,
 };
 
 export default CRDate;
