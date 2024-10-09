@@ -1,6 +1,39 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
+/**
+ * El componente CRSelect renderiza un menú desplegable personalizable con soporte para selección única o múltiple,
+ * búsqueda, opciones para limpiar la selección, y manejo de varios estados como cargando, errores y estado deshabilitado.
+ *
+ * @param {object} props - Las propiedades del componente.
+ * @param {string} [props.title] - El título o etiqueta para el componente select. Si existe colocará un label antes del select.
+ * @param {boolean} [props.disable=false] - Indica si el select está deshabilitado.
+ * @param {boolean} [props.chevron=true] - Indica si se muestra un ícono de flecha en el select.
+ * @param {boolean} [props.loading=false] - Indica si el select está en estado de carga.
+ * @param {string} [props.loadingText="Cargando..."] - El texto a mostrar cuando el select está en estado de carga.
+ * @param {string} [props.disableText] - El texto a mostrar cuando el select está deshabilitado.
+ * @param {boolean} [props.multi=false] - Indica si se permite la selección múltiple. Si es `true` el select mostrará los elementos seleccionados en un contenedor.
+ * @param {boolean} [props.clearable=true] - Indica si se muestra un ícono para limpiar la selección. Por defecto es `true`.
+ * @param {boolean} [props.separator=false] - Indica si se muestra una línea separadora entre las opciones del select. Por defecto es `false`.
+ * @param {string} [props.color="#3b82f6"] - El color de fondo de los elementos seleccionados en modo múltiple y en single. El color se debe pasar en formato hexadecimal. Por defecto es `#3b82f6`.
+ * @param {number} [props.height=200] - La altura máxima del menú desplegable. Por defecto es `200`.
+ * @param {string} [props.placeholder="Seleccione..."] - El texto a mostrar cuando no hay elementos seleccionados.
+ * @param {string} [props.labelField="label"] - El nombre del campo que contiene el texto a mostrar en las opciones del select.
+ * @param {string} [props.valueField="value"] - El nombre del campo que contiene el valor de la opción seleccionada.
+ * @param {string} [props.icon] - El nombre del campo que contiene la URL de la imagen a mostrar en las opciones del select.
+ * @param {array} [props.data=[]] - Un arreglo de objetos con las opciones a mostrar en el select.
+ * @param {boolean} [props.searchable=false] - Indica si se muestra un campo de búsqueda en el menú desplegable. Por defecto es `false`.
+ * @param {function} [props.setValue] - La función que se ejecuta al seleccionar una opción. Recibe como argumento el valor o valores seleccionados.
+ * @param {boolean} [props.reset] - Indica si se debe limpiar la selección del select. No es necesario pasar un valor, solo con cambiar el estado se ejecutará la acción. En pocas palabras, si es true o false, pero si cambiar el valor anterior se reinicia.
+ * @param {array[]} [props.defaultValue] - El valor o valores por defecto a seleccionar en el select. Puede ser un objeto o un arreglo de objetos.
+ * @param {"auto"|"top"|"bottom"} [props.direction="auto"] - La dirección en la que se despliega el menú. Puede ser `auto`, `top` o `bottom`. Por defecto es `auto`.
+ * @param {string} [props.searchField] - El nombre del campo por el cual se realizar la búsqueda en el menú desplegable. Por defecto es `labelField`.
+ * @param {boolean} [props.autoClose=true] - Indica si el menú desplegable se cierra automáticamente al seleccionar una opción. Por defecto es `true`.
+ * @param {string} [props.error] - El mensaje de error a mostrar debajo del select.
+ * @param {boolean} [props.onlySelectValues=false] - Indica si solo se deben retornar los valores de las opciones seleccionadas. Por defecto es `false`.
+ * @returns {JSX.Element} - El componente select.
+ */
+
 const CRSelect = ({
   title,
   disable = false,
@@ -127,7 +160,7 @@ const CRSelect = ({
   const renderValue = () => {
     if (loading || (!dataLoaded && !timeoutExpired)) return loadingText;
     if (disable && disableText) return disableText;
-    if (selectedItems.length === 0) return <span className={`${error ? "text-red-500" : "text-gray-700"}`}>{placeholder}</span>;
+    if (selectedItems.length === 0) return <span className={`${error ? "text-red-500" : "text-gray-400"}`}>{placeholder}</span>;
     if (multi) {
       return selectedItems.map((item) => (
         <div
@@ -158,7 +191,7 @@ const CRSelect = ({
 
   return (
     <div className="relative w-full" ref={selectRef}>
-      {title && <label className={`block mb-1 font-medium ${error ? "text-red-500" : "text-gray-700"}`}>{title}</label>}
+      {title && <label className={`block mb-2 font-medium ${error ? "text-red-500" : "text-gray-700 dark:text-white"}`}>{title}</label>}
       <div
         className={`relative w-full border rounded-md ${error ? "border-red-500" : "border-gray-300"} ${
           disable || loading ? "bg-gray-100 cursor-not-allowed opacity-70 saturate-50" : "cursor-pointer"
@@ -208,16 +241,23 @@ const CRSelect = ({
         </div>
         {isOpen && (
           <div
-            className={`absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg ${
+            className={`absolute z-10 w-full mt-1 bg-white dark:bg-neutral-800 border border-gray-300 rounded-md shadow-lg ${
               direction === "top" ? "bottom-full mb-1" : "top-full"
             }`}
-            style={{ maxHeight: `${height}px`, overflowY: "auto" }}
+            style={{
+              maxHeight: `${height}px`,
+              overflowY: "auto",
+              scrollbarWidth: "thin",
+              scrollbarColor: `${document.documentElement.classList.contains("dark") ? "#808080" : "#adadad"} ${
+                document.documentElement.classList.contains("dark") ? "rgb(38,38,38)" : "#ffffff"
+              }`, // Uno es el color del scrollbar y el otro el fondo del scrollbar por eso se repite el código
+            }}
           >
             {searchable && (
               <div className="p-2">
                 <input
                   type="text"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 bg-white dark:bg-neutral-700 rounded-md"
                   placeholder="Buscar..."
                   value={searchTerm}
                   onChange={handleSearch}
@@ -238,7 +278,7 @@ const CRSelect = ({
                     }}
                     onClick={() => handleItemClick(item)}
                   >
-                    <div className="flex items-center">
+                    <div className="flex items-center text-gray-800 dark:text-white">
                       {item[icon] && <img src={item[icon]} alt="" className="w-6 h-6 mr-2 -ml-1 rounded-full" />}
                       {item[labelField]}
                     </div>
