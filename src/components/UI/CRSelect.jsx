@@ -34,16 +34,37 @@ const CRSelect = ({
   const [searchTerm, setSearchTerm] = useState("");
   const selectRef = useRef(null);
 
-  useEffect(() => {
-    if (defaultValue) {
-      const defaultItems = Array.isArray(defaultValue) ? defaultValue : [defaultValue];
-      setSelectedItems(defaultItems.map((item) => data.find((dataItem) => dataItem[valueField] === item[valueField]) || item));
-    }
-  }, [defaultValue, data, valueField]);
+  const [defaultApplied, setDefaultApplied] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [timeoutExpired, setTimeoutExpired] = useState(false);
 
   useEffect(() => {
-    setFilteredData(data);
+    if (dataLoaded && defaultValue && !timeoutExpired && !defaultApplied) {
+      const defaultItems = Array.isArray(defaultValue) ? defaultValue : [defaultValue];
+      const matchedItems = defaultItems.map((item) => data.find((dataItem) => dataItem[valueField] === item[valueField])).filter(Boolean);
+
+      if (matchedItems.length > 0) {
+        setSelectedItems(matchedItems);
+        setValue && setValue(onlySelectValues ? matchedItems.map((item) => item[valueField]) : matchedItems);
+      }
+      setDefaultApplied(true);
+    }
+  }, [dataLoaded, defaultValue, timeoutExpired, defaultApplied, data, valueField, setValue, onlySelectValues]);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      setFilteredData(data);
+      setDataLoaded(true);
+    }
   }, [data]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeoutExpired(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     setSelectedItems([]);
@@ -65,7 +86,7 @@ const CRSelect = ({
   }, []);
 
   const toggleSelect = () => {
-    if (!disable && !loading) {
+    if (!disable && !loading && (dataLoaded || timeoutExpired)) {
       setIsOpen(!isOpen);
     }
   };
@@ -76,13 +97,11 @@ const CRSelect = ({
       updatedItems = selectedItems.some((selectedItem) => selectedItem[valueField] === item[valueField])
         ? selectedItems.filter((selectedItem) => selectedItem[valueField] !== item[valueField])
         : [...selectedItems, item];
-      setSelectedItems(updatedItems);
     } else {
       updatedItems = [item];
-      setSelectedItems(updatedItems);
       autoClose && setIsOpen(false);
     }
-
+    setSelectedItems(updatedItems);
     setValue && setValue(onlySelectValues ? updatedItems.map((item) => item[valueField]) : updatedItems);
   };
 
@@ -102,10 +121,11 @@ const CRSelect = ({
   const clearSelection = () => {
     setSelectedItems([]);
     setValue && setValue(multi ? [] : null);
+    setDefaultApplied(false);
   };
 
   const renderValue = () => {
-    if (loading) return loadingText;
+    if (loading || (!dataLoaded && !timeoutExpired)) return loadingText;
     if (disable && disableText) return disableText;
     if (selectedItems.length === 0) return <span className={`${error ? "text-red-500" : "text-gray-700"}`}>{placeholder}</span>;
     if (multi) {
