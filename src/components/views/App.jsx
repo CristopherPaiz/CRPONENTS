@@ -5,6 +5,7 @@ import { useTheme } from "../../context/ThemeProvider";
 import CRDate from "../UI/CRDate";
 import CRButton from "../UI/CRButton";
 import CRSelect from "../UI/CRSelect";
+import CRModal from "../UI/CRModal";
 
 const App = () => {
   const { theme, setTheme } = useTheme();
@@ -13,6 +14,7 @@ const App = () => {
   const [prueba, setPrueba] = useState("");
   const [resetear, setResetear] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // OBJETOS DE PRUEBA
   const testData = [
@@ -66,7 +68,7 @@ const App = () => {
   // ##### RENDER #####
   return (
     <div className="w-full h-screen bg-white dark:bg-neutral-800 flex justify-center items-center">
-      <div className="w-1/2 justify-center m-auto p-5">
+      <div className="w-11/12 justify-center m-auto p-5 sm:w-1/2">
         <button className="absolute right-0 top-0" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
           {theme === "light" ? "🌙" : "☀️"}
         </button>
@@ -74,7 +76,6 @@ const App = () => {
         {/* /////////////////////////////////////// COMPONENTES /////////////////////////////////////// */}
         <CRInput title="Nombre" placeholder="Escriba su nombre" setValue={setPrueba} reset={resetear} />
         <CRDate title="Fecha" setValue={setPrueba} reset={resetear} />
-        <CRButton title="Resetear" icon="close" onClick={() => setResetear(!resetear)} />
         <CRSelect
           data={testData}
           multi={true}
@@ -88,6 +89,19 @@ const App = () => {
           icon={"icon"}
           defaultValue={defaultItems}
         />
+        <CRButton title="Resetear" icon="close" onClick={() => setResetear(!resetear)} />
+        <CRButton title="Abrir Modal" className="bg-green-500 text-white" onClick={() => setIsModalOpen(true)} />
+
+        <CRModal setIsOpen={setIsModalOpen} isOpen={isModalOpen} title="Ejemplo de Modal" >
+          <div>
+            <h1>Contenido del Modal</h1>
+            <p>FIRST Este es un ejemplo de contenido dentro del modal.</p>
+            <p>LAST Este es un ejemplo de contenido dentro del modal.</p>
+            <button className="bg-green-500 rounded-sm py-1 px-2" onClick={() => setIsModalOpen(false)}>
+              Cerrar Modal
+            </button>
+          </div>
+        </CRModal>
         {/* ##### PARA LAS PRUEBAS ##### */}
         {prueba && (
           <p className="text-center text-xl mt-2">
