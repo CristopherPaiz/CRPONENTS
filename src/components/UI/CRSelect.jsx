@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
  * @param {boolean} [props.loading=false] - Indica si el select está en estado de carga.
  * @param {string} [props.loadingText="Cargando..."] - El texto a mostrar cuando el select está en estado de carga.
  * @param {string} [props.disableText] - El texto a mostrar cuando el select está deshabilitado.
+ * @param {boolean} [props.insensitive=false] - Indica si la búsqueda es insensible a tildes Por defecto es `false`.
  * @param {boolean} [props.multi=false] - Indica si se permite la selección múltiple. Si es `true` el select mostrará los elementos seleccionados en un contenedor.
  * @param {boolean} [props.clearable=true] - Indica si se muestra un ícono para limpiar la selección. Por defecto es `true`.
  * @param {boolean} [props.separator=false] - Indica si se muestra una línea separadora entre las opciones del select. Por defecto es `false`.
@@ -59,6 +60,7 @@ const CRSelect = ({
   loading = false,
   loadingText = "Cargando...",
   disableText,
+  insensitive = false,
   multi = false,
   clearable = true,
   separator = false,
@@ -150,7 +152,9 @@ const CRSelect = ({
         : [...selectedItems, item];
     } else {
       updatedItems = [item];
-      autoClose && setIsOpen(false);
+      if (autoClose) {
+        setIsOpen(false);
+      }
     }
     setSelectedItems(updatedItems);
     setValue && setValue(onlySelectValues ? updatedItems.map((item) => item[valueField]) : updatedItems);
@@ -159,7 +163,18 @@ const CRSelect = ({
   const handleSearch = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
-    const filtered = data.filter((item) => item[searchField || labelField].toLowerCase().includes(term.toLowerCase()));
+    const filtered = data.filter((item) => {
+      const itemValue = item[searchField || labelField].toLowerCase();
+      const searchValue = term.toLowerCase();
+
+      if (insensitive) {
+        const normalizedItemValue = itemValue.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const normalizedSearchValue = searchValue.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return normalizedItemValue.includes(normalizedSearchValue);
+      } else {
+        return itemValue.includes(searchValue);
+      }
+    });
     setFilteredData(filtered);
   };
 
@@ -209,15 +224,15 @@ const CRSelect = ({
 
   return (
     <div className="relative w-full" ref={selectRef}>
-      {title && <label className={`block mb-2 font-medium ${error ? "text-red-500" : "text-gray-700 dark:text-white"}`}>{title}</label>}
+      {title && <label className={`block my-2 ${error ? "text-red-500" : "text-gray-700 dark:text-white"}`}>{title}</label>}
       <div
-        className={`relative w-full border rounded-md ${error ? "border-red-500" : "border-gray-300"} ${
+        className={`relative w-full border rounded-md ${error ? "border-red-500" : "border-gray-300 dark:border-gray-500"} ${
           disable || loading ? "bg-gray-100 cursor-not-allowed opacity-70 saturate-50" : "cursor-pointer"
         }`}
         onClick={toggleSelect}
       >
         <div className="flex items-center p-2 min-h-[38px]">
-          <div className="flex-grow overflow-hidden">{renderValue()}</div>
+          <div className="flex-grow overflow-hidden text-black dark:text-white">{renderValue()}</div>
           <div className="flex-shrink-0 ml-2 flex items-center">
             {clearable && selectedItems.length > 0 && (
               <svg
@@ -272,10 +287,10 @@ const CRSelect = ({
             }}
           >
             {searchable && (
-              <div className="p-2">
+              <div className="p-2 pt-3">
                 <input
                   type="text"
-                  className="w-full p-2 border border-gray-300 bg-white dark:bg-neutral-700 rounded-md"
+                  className="w-full p-2 border border-gray-300 bg-white dark:bg-neutral-700 rounded-md text-black dark:text-white"
                   placeholder="Buscar..."
                   value={searchTerm}
                   onChange={handleSearch}
@@ -301,7 +316,7 @@ const CRSelect = ({
                       {item[labelField]}
                     </div>
                   </div>
-                  {separator && index < filteredData.length - 1 && <hr className="border-gray-300" />}
+                  {separator && index < filteredData.length - 1 && <hr className="border-gray-300 dark:border-gray-600" />}
                 </React.Fragment>
               ))
             )}
@@ -320,6 +335,7 @@ CRSelect.propTypes = {
   loading: PropTypes.bool,
   loadingText: PropTypes.string,
   disableText: PropTypes.string,
+  insensitive: PropTypes.bool,
   multi: PropTypes.bool,
   clearable: PropTypes.bool,
   separator: PropTypes.bool,
