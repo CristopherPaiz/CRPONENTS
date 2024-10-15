@@ -132,7 +132,7 @@ const App = () => {
           </p>
         )}
         {selectedItems && console.log(selectedItems)}
-        {activateLoader && <CRLoader fullScreen />}
+        {activateLoader && <CRLoader />}
       </div>
     </div>
   );
