@@ -115,10 +115,10 @@ const CRAlert = (() => {
     }, [duration, handleClose, persistent]);
 
     const typeClasses = {
-      info: "bg-blue-500/95",
-      warning: "bg-yellow-500/95",
-      success: "bg-green-500/95",
-      error: "bg-red-500/95",
+      info: "bg-blue-600/95 dark:bg-blue-700/95 drop-shadow-md",
+      warning: "bg-yellow-600/95 dark:bg-yellow-700/95 drop-shadow-md",
+      success: "bg-green-600/95 dark:bg-green-700/95 drop-shadow-md",
+      error: "bg-red-600/95 dark:bg-red-700/95 drop-shadow-md",
     };
 
     const getPositionStyles = () => {
