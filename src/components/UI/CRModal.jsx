@@ -21,6 +21,15 @@ import PropTypes from "prop-types";
  * @param {React.ReactNode} [props.children] - El contenido que se va a renderizar dentro del modal.
  *
  * @returns {React.ReactElement|null} El elemento del modal o null si no está abierto.
+ *
+ * @example
+ * <CRModal title="Título del modal" isOpen={isOpen} setIsOpen={setIsOpen}>
+ *  <p>Contenido del modal</p>
+ * </CRModal>
+ *
+ * <CRModal isOpen={isOpen} setIsOpen={setIsOpen} disableBackdropClick>
+ * <p>Contenido del modal</p>
+ * </CRModal>
  */
 
 const CRModal = ({

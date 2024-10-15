@@ -53,6 +53,18 @@ const StyleCalendar = {
  * @param {string} [props.classNameBox] - Clases TAILWIND adicionales para el estilo del cuadro del calendario emergente.
  *
  * @returns {JSX.Element} El campo de entrada con su funcionalidad asociada.
+ *
+ * @example
+ * <CRDate title="Fecha" setValue={setBirth} value={birth} />
+ * <CRDate title="Fecha" setValue={setBirth} value={birth} disabled />
+ * <CRDate title="Fecha" setValue={setBirth} value={birth} reset={reset} />
+ * <CRDate title="Fecha" setValue={setBirth} value={birth} position="top" />
+ * <CRDate title="Fecha" setValue={setBirth} value={birth} error="La fecha es inválida" />
+ * <CRDate title="Fecha" setValue={setBirth} value={birth} placeholder="Selecciona una fecha" />
+ * <CRDate title="Fecha" setValue={setBirth} value={birth} classNameInput="bg-gray-100" />
+ * <CRDate title="Fecha" setValue={setBirth} value={birth} classNameBox="bg-gray-100" />
+ * <CRDate title="Fecha" setValue={setBirth} value={birth} locale="en" />
+ * <CRDate title="Fecha" setValue={setBirth} value={birth} defaultValue="1990-01-01" />
  */
 
 const CRDate = ({

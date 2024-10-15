@@ -19,6 +19,12 @@ import PropTypes from "prop-types";
  * @param {"center"|"left"|"right"} [props.position="center"] - Alineación del botón dentro de su contenedor. Puede ser "center" (centrado), "left" (izquierda) o "right" (derecha).
  *
  * @returns {JSX.Element} - Componente de botón renderizado.
+ *
+ * @example
+ * <CRButton title="Guardar" icon="save" onClick={handleSave} />
+ * <CRButton title="Eliminar" icon="delete" onClick={handleDelete} />
+ * <CRButton title="Buscar" icon="search" onClick={handleSearch} />
+ * <CRButton title="Cerrar" icon="close" onClick={handleClose} />
  */
 
 const CRButton = ({

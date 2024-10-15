@@ -32,6 +32,24 @@ import PropTypes from "prop-types";
  * @param {string} [props.error] - El mensaje de error a mostrar debajo del select.
  * @param {boolean} [props.onlySelectValues=false] - Indica si solo se deben retornar los valores de las opciones seleccionadas. Por defecto es `false`.
  * @returns {JSX.Element} - El componente select.
+ *
+ * @example
+ * //Ejemplo básico
+ * const countries = [{ label: "Colombia", value: "CO" }, { label: "Perú", value: "PE" }];
+ * <CRSelect title="País" data={countries} setValue={setCountry} />
+ *
+ * //Especificar label y value por otro diferente
+ * const countries = [{ countryName: "Colombia", countryCode: "CO" }, { countryName: "Perú", countryCode: "PE" }];
+ * <CRSelect title="País" data={countries} labelField="countryName" valueField="countryCode" setValue={setCountry} />
+ *
+ * //Ejemplo de objeto y defaultValue
+ * const countries = [{ name: "Colombia", code: "CO" }, { name: "Perú", code: "PE" }];
+ * const defaultCountry = [{ name: "Colombia", code: "CO" }];
+ * <CRSelect title="País" data={countries} labelField="name" valueField="code" setValue={setCountry} defaultValue={defaultCountry} />
+ *
+ * //Buscar por otro campo
+ * <CRSelect title="País" data={countries} labelField="name" valueField="code" searchField="name" setValue={setCountry} />
+ *
  */
 
 const CRSelect = ({

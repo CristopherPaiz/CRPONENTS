@@ -20,6 +20,19 @@ import PropTypes from "prop-types";
  * @param {string} [props.error] - Mensaje de error a mostrar debajo del campo.
  *
  * @returns {JSX.Element} El campo de entrada con su funcionalidad asociada.
+ *
+ * @example
+ * <CRInput title="Nombre" type="text" placeholder="Escribe tu nombre" maxLength={50} setValue={setName} value={name} />
+ *
+ * <CRInput title="Edad" type="number" placeholder="Ingresa tu edad" setValue={setAge} value={age} />
+ *
+ * <CRInput title="Correo" type="email" placeholder="Ingresa tu correo" setValue={setEmail} value={email} />
+ *
+ * <CRInput title="Teléfono" type="tel" placeholder="Ingresa tu teléfono" setValue={setPhone} value={phone} />
+ *
+ * <CRInput title="Contraseña" type="password" placeholder="Ingresa tu contraseña" setValue={setPassword} value={password} />
+ *
+ * <CRInput title="Mensaje" type="text" placeholder="Escribe tu mensaje" maxLength={200} setValue={setMessage} value={message} />
  */
 
 const CRInput = ({ title, className, type, placeholder, maxLength, disabled, setValue, value, defaultValue, reset, autoComplete, error, ...props }) => {
