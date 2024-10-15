@@ -7,6 +7,7 @@ import CRButton from "../UI/CRButton";
 import CRSelect from "../UI/CRSelect";
 import CRModal from "../UI/CRModal";
 import CRAlert from "../UI/CRAlert";
+import CRLoader from "../UI/CRLoader";
 
 const App = () => {
   const { theme, setTheme } = useTheme();
@@ -16,6 +17,7 @@ const App = () => {
   const [resetear, setResetear] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activateLoader, setActivateLoader] = useState(false);
 
   // OBJETOS DE PRUEBA
   const testData = [
@@ -111,6 +113,7 @@ const App = () => {
         />
         <CRButton title="Resetear" icon="close" onClick={() => setResetear(!resetear)} />
         <CRButton title="Abrir Modal" className="bg-green-500 text-white" onClick={() => setIsModalOpen(true)} />
+        <CRButton title="Activar Loader" className="bg-blue-500 text-white" onClick={() => setActivateLoader(!activateLoader)} />
 
         <CRModal setIsOpen={setIsModalOpen} isOpen={isModalOpen} title="Ejemplo de Modal">
           <div>
@@ -129,6 +132,7 @@ const App = () => {
           </p>
         )}
         {selectedItems && console.log(selectedItems)}
+        {activateLoader && <CRLoader fullScreen />}
       </div>
     </div>
   );
