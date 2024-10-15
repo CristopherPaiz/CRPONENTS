@@ -131,10 +131,15 @@ const App = () => {
           reset={resetear}
           icon={"icon"}
           defaultValue={defaultItems}
+          color="teal"
         />
-        <CRButton title="Resetear" icon="close" onClick={() => setResetear(!resetear)} />
+        <CRButton title="Resetear" className="bg-red-500 text-white" icon="close" onClick={() => setResetear(!resetear)} />
         <CRButton title="Abrir Modal" className="bg-green-500 text-white" onClick={() => setIsModalOpen(true)} />
-        <CRButton title="Activar Loader" className="bg-blue-500 text-white" onClick={() => setActivateLoader(!activateLoader)} />
+        <CRButton
+          title={`${activateLoader ? "Desactivar" : "Activar"} Loader`}
+          className="bg-blue-500 text-white"
+          onClick={() => setActivateLoader(!activateLoader)}
+        />
 
         <CRModal setIsOpen={setIsModalOpen} isOpen={isModalOpen} title="Ejemplo de Modal">
           <div>

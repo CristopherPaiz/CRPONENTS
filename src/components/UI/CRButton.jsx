@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+
+const isMobile = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
 
 /**
  * CRButton - Componente de botón configurable con soporte para íconos, estados de carga y deshabilitado.
@@ -41,18 +45,36 @@ const CRButton = ({
   className,
   position = "center",
 }) => {
+  // HOVER MOBILE
+  const [isHovered, setIsHovered] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+
   const buttonClasses = `
-    flex items-center justify-center px-4 py-3 rounded-md
-    transition-all duration-300 ease-in-out my-2
-    ${disable || loading ? "opacity-50" : "hover:opacity-80"}
-    ${className || "bg-blue-500 text-white"}
-  `;
+  flex items-center justify-center px-4 py-3 rounded-md
+  transition-all duration-300 ease-in-out my-2
+  ${disable || loading ? "opacity-50" : isHovered ? "opacity-80" : ""}
+  ${className || "bg-blue-500 text-white"}
+`;
 
   const iconClassesLeft = "w-5 h-4 bottom-0 mr-[3px] ml-0 -mb-[2px]";
   const iconClassesRight = "w-5 h-4 bottom-0 ml-[3px] mr-0 -mb-[2px]";
 
   const iconLoadingLeft = "animate-spin h-5 w-5 mr-3";
   const iconLoadingRight = "animate-spin h-5 w-5 ml-3";
+
+  useEffect(() => {
+    if (isHovered && isMobile()) {
+      const timeout = setTimeout(() => {
+        setIsHovered(false);
+      }, 200);
+      setHoverTimeout(timeout);
+    }
+    return () => {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+      }
+    };
+  }, [isHovered]);
 
   const renderIcon = () => {
     if (loading) {
@@ -300,7 +322,23 @@ const CRButton = ({
 
   return (
     <div className={position === "center" ? center : position === "left" ? left : right}>
-      <button className={buttonClasses} onClick={onClick} disabled={disable || loading}>
+      <button
+        className={buttonClasses}
+        onClick={onClick}
+        disabled={disable || loading}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => {
+          if (!isMobile()) {
+            setIsHovered(false);
+          }
+        }}
+        onTouchStart={() => setIsHovered(true)}
+        onTouchEnd={() => {
+          if (isMobile()) {
+            setIsHovered(false);
+          }
+        }}
+      >
         {content}
       </button>
     </div>
