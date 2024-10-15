@@ -102,9 +102,9 @@ const App = () => {
           separator
           searchable={true}
           setValue={setSelectedItems}
-          autoClose={false}
+          autoClose={true}
           title="Seleccione una fruta"
-          searchField="description"
+          searchField="label"
           reset={resetear}
           icon={"icon"}
           defaultValue={defaultItems}
