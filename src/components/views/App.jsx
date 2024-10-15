@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/index.css";
 import CRInput from "../UI/CRInput";
 import { useTheme } from "../../context/ThemeProvider";
@@ -6,6 +6,7 @@ import CRDate from "../UI/CRDate";
 import CRButton from "../UI/CRButton";
 import CRSelect from "../UI/CRSelect";
 import CRModal from "../UI/CRModal";
+import CRAlert from "../UI/CRAlert";
 
 const App = () => {
   const { theme, setTheme } = useTheme();
@@ -65,6 +66,25 @@ const App = () => {
     },
   ];
 
+  // const createSequentialAlerts = (alerts) => {
+  //   alerts.forEach((alert, index) => {
+  //     setTimeout(() => {
+  //       CRAlert.alert(alert);
+  //     }, index * 500);
+  //   });
+  // };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      CRAlert.alert({
+        title: "Tzoc",
+        message: "Este es un mensaje de prueba",
+        duration: 5000,
+        position: "top-right",
+      });
+    }
+  }, [isModalOpen]);
+
   // ##### RENDER #####
   return (
     <div className="w-full h-screen bg-white dark:bg-neutral-800 flex justify-center items-center">
@@ -92,7 +112,7 @@ const App = () => {
         <CRButton title="Resetear" icon="close" onClick={() => setResetear(!resetear)} />
         <CRButton title="Abrir Modal" className="bg-green-500 text-white" onClick={() => setIsModalOpen(true)} />
 
-        <CRModal setIsOpen={setIsModalOpen} isOpen={isModalOpen} title="Ejemplo de Modal" >
+        <CRModal setIsOpen={setIsModalOpen} isOpen={isModalOpen} title="Ejemplo de Modal">
           <div>
             <h1>Contenido del Modal</h1>
             <p>FIRST Este es un ejemplo de contenido dentro del modal.</p>
