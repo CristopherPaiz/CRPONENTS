@@ -79,11 +79,32 @@ const App = () => {
   useEffect(() => {
     if (isModalOpen) {
       CRAlert.alert({
-        title: "Tzoc",
+        title: "Tzoc1",
         message: "Este es un mensaje de prueba",
         duration: 5000,
         position: "top-right",
       });
+      // CRAlert.alert({
+      //   title: "Tzoc2",
+      //   message: "Este es un mensaje de prueba2",
+      //   duration: 5000,
+      //   position: "top-right",
+      //   type: "error",
+      // });
+      // CRAlert.alert({
+      //   title: "Tzoc3",
+      //   message: "Este es un mensaje de prueba3",
+      //   duration: 5000,
+      //   position: "top-right",
+      //   type: "warning",
+      // });
+      // CRAlert.alert({
+      //   title: "Tzoc4",
+      //   message: "Este es un mensaje de prueba4",
+      //   duration: 5000,
+      //   position: "top-right",
+      //   type: "success",
+      // });
     }
   }, [isModalOpen]);
 
