@@ -29,17 +29,18 @@ git clone https://github.com/CristopherPaiz/CRPONENTS.git
 - CRLoader
 - CRAlert
 
-- CRDialog
-- CRDrawer
-
 - CRNavbar
+- CRDrawer
+- CRTabs
+- CRCarousel
+
 - CRSwitch
+- CRDialog
 - CRPagination
 
 - CRRadio
 - CRCheckbox
 
-- CRTabs
 - CRCard
 - CRTable
 
