@@ -3,6 +3,100 @@ import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 // import { Link } from "react-router-dom";
 
+/**
+ * Componente CRNavbar
+ *
+ * Este componente renderiza una barra de navegación configurable que puede orientarse en la parte superior o izquierda de la pantalla. Soporta un logotipo, enlaces, botones de llamada a la acción (CTA), menús desplegables, perfiles de usuario y opciones para adaptarse a la navegación móvil.
+ *
+ * @param {Object} props - Las propiedades del componente.
+ * @param {"top"|"left"} [props.orientation="top"] - Define la orientación del navbar (superior o izquierda).
+ * @param {Object} [props.logo] - Configuración del logotipo.
+ * @param {string} [props.logo.img=""] - URL de la imagen del logotipo.
+ * @param {string} [props.logo.label="Logo"] - Texto alternativo si no hay imagen.
+ * @param {string} [props.logo.size="h-6"] - Tamaño de la imagen del logotipo.
+ * @param {string} [props.logo.path="/"] - Ruta de navegación del logotipo.
+ * @param {boolean} [props.useRouter=false] - Indica si se debe usar un enrutador como `Link` para la navegación interna.
+ * @param {boolean} [props.isSticky=false] - Indica si el navbar debe ser sticky (fijo al hacer scroll).
+ * @param {boolean} [props.useMenu=true] - Habilita o deshabilita el menú móvil.
+ * @param {Array<Object>} [props.ctaButtons=[]] - Botones de llamada a la acción (CTA).
+ * @param {Array<Object>} [props.links=[]] - Lista de enlaces de navegación.
+ * @param {boolean} [props.auth=false] - Indica si el usuario está autenticado.
+ * @param {Object} [props.useProfile=null] - Información del perfil del usuario (si se usa).
+ *
+ * @example
+ * // Ejemplo simple
+ * <CRNavbar
+ *   logo={{ img: "logo.png", label: "Mi App", path: "/" }}
+ *   links={[{ label: "Inicio", path: "/" }, { label: "Acerca de", path: "/about" }]}
+ * />
+ *
+ * @example
+ * // Ejemplo intermedio con botones de acción y enlaces autenticados
+ * <CRNavbar
+ *   isSticky={true}
+ *   ctaButtons={[{ label: "Iniciar sesión", onClick: () => alert('Login') }]}
+ *   links={[
+ *     { label: "Inicio", path: "/" },
+ *     { label: "Perfil", path: "/profile", needAuthenticate: true }
+ *   ]}
+ *   auth={true}
+ * />
+ *
+ * @example
+ * // Ejemplo avanzado con todo configurado
+ * <CRNavbar
+ *   orientation="left"
+ *   logo={{ img: "logo.png", label: "Mi App", size: "h-8", path: "/" }}
+ *   isSticky={true}
+ *   useRouter={true}
+ *   useMenu={true}
+ *   ctaButtons={[
+ *     { label: "Iniciar sesión", onClick: () => alert('Login'), icon: <IconUser />, className: "custom-class" },
+ *     { label: "Registrarse", onClick: () => alert('Signup'), icon: <IconSignup /> }
+ *   ]}
+ *   links={[
+ *     {
+ *       label: "Inicio",
+ *       path: "/",
+ *       icon: <IconHome />,
+ *       dropdown: [
+ *         { label: "Sub-enlace 1", path: "/sub1" },
+ *         { label: "Sub-enlace 2", path: "/sub2" }
+ *       ]
+ *     },
+ *     { label: "Acerca de", path: "/about", icon: <IconAbout /> }
+ *   ]}
+ *   auth={true}
+ *   useProfile={{ label: "Perfil", onClick: () => alert('Perfil'), icon: <ProfileIcon /> }}
+ * />
+ *
+ * @typedef {Object} Logo - Representa el logotipo del navbar.
+ * @property {string} img - URL de la imagen del logotipo.
+ * @property {string} label - Texto alternativo del logotipo.
+ * @property {string} size - Clase de tamaño de la imagen.
+ * @property {string} path - Ruta de navegación del logotipo.
+ *
+ * @typedef {Object} Button - Representa un botón de llamada a la acción (CTA).
+ * @property {string} label - Texto del botón.
+ * @property {function} onClick - Función que se ejecuta al hacer clic.
+ * @property {React.ReactNode} [icon] - Icono del botón (opcional).
+ * @property {string} [className] - Clases adicionales para el botón.
+ *
+ * @typedef {Object} Link - Representa un enlace de navegación.
+ * @property {string} label - Texto del enlace.
+ * @property {string} [path] - Ruta de navegación.
+ * @property {React.ReactNode} [icon] - Icono del enlace (opcional).
+ * @property {boolean} [needAuthenticate] - Si el enlace requiere autenticación para mostrarse.
+ * @property {string} [className] - Clases adicionales para el enlace.
+ * @property {Array<Link>} [dropdown] - Lista de subenlaces en un menú desplegable (opcional).
+ *
+ * @typedef {Object} Profile - Representa la configuración del perfil del usuario.
+ * @property {function} onClick - Función que se ejecuta al hacer clic en el perfil.
+ * @property {string} label - Texto del perfil.
+ * @property {React.ReactNode} [icon] - Icono del perfil (opcional).
+ * @property {string} [className] - Clases adicionales para el botón de perfil.
+ */
+
 const CRNavbar = ({
   orientation = "top",
   logo = { img: "", label: "Logo", size: "h-6", path: "/" },
