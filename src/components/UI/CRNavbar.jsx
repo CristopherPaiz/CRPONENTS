@@ -70,10 +70,258 @@ import PropTypes from "prop-types";
  *   useProfile={{ label: "Perfil", onClick: () => alert('Perfil'), icon: <ProfileIcon /> }}
  * />
  *
- * @typedef {Object} Logo - Representa el logotipo del navbar.
- * @property {string} img - URL de la imagen del logotipo.
- * @property {string} label - Texto alternativo del logotipo.
- * @property {string} size - Clase de tamaño de la imagen.
+ * @example
+ * //Ejemplo super avanzado con todo configurado, enrutar y funciones por botones
+ *   const [isAuthenticated, setIsAuthenticated] = useState(false);
+ *
+ *  const handleSignUp = () => {
+ *    console.log("Sign Up clicked");
+ *  };
+ *
+ *  const handleLogIn = () => {
+ *    console.log("Log In clicked");
+ *    setIsAuthenticated(true);
+ *  };
+ *
+ *  const handleLogOut = () => {
+ *    console.log("Log Out clicked");
+ *    setIsAuthenticated(false);
+ *  };
+ *
+ *  const handleProfile = () => {
+ *    console.log("Profile clicked");
+ *  };
+ *
+ *  const logoConfig = {
+ *    label: "MyApp",
+ *    size: "h-8 w-auto",
+ *    path: "/",
+ *  };
+ *
+ *  const ctaButtons = [
+ *    {
+ *      label: "Sign Up",
+ *      onClick: handleSignUp,
+ *      icon: (
+ *        <svg
+ *          xmlns="http://www.w3.org/2000/svg"
+ *          width="18"
+ *          height="18"
+ *          viewBox="0 0 24 24"
+ *          fill="none"
+ *          stroke="currentColor"
+ *          strokeWidth="2"
+ *          strokeLinecap="round"
+ *          strokeLinejoin="round"
+ *        >
+ *          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+ *          <circle cx="12" cy="7" r="4"></circle>
+ *        </svg>
+ *      ),
+ *    },
+ *    {
+ *      label: "Log In",
+ *      onClick: handleLogIn,
+ *      icon: (
+ *        <svg
+ *          xmlns="http://www.w3.org/2000/svg"
+ *          width="18"
+ *          height="18"
+ *          viewBox="0 0 24 24"
+ *          fill="none"
+ *          stroke="currentColor"
+ *          strokeWidth="2"
+ *          strokeLinecap="round"
+ *          strokeLinejoin="round"
+ *        >
+ *          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+ *          <polyline points="10 17 15 12 10 7"></polyline>
+ *          <line x1="15" y1="12" x2="3" y2="12"></line>
+ *        </svg>
+ *      ),
+ *    },
+ *  ];
+ *
+ *  const links = [
+ *    {
+ *      label: "Home",
+ *      icon: (
+ *        <svg
+ *          xmlns="http://www.w3.org/2000/svg"
+ *          width="18"
+ *          height="18"
+ *          viewBox="0 0 24 24"
+ *          fill="none"
+ *          stroke="currentColor"
+ *          strokeWidth="2"
+ *          strokeLinecap="round"
+ *          strokeLinejoin="round"
+ *        >
+ *          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+ *          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+ *        </svg>
+ *      ),
+ *      path: "/",
+ *      needAuthenticate: false,
+ *    },
+ *    {
+ *      label: "Products",
+ *      icon: (
+ *        <svg
+ *          xmlns="http://www.w3.org/2000/svg"
+ *          width="18"
+ *          height="18"
+ *          viewBox="0 0 24 24"
+ *          fill="none"
+ *          stroke="currentColor"
+ *          strokeWidth="2"
+ *          strokeLinecap="round"
+ *          strokeLinejoin="round"
+ *        >
+ *          <circle cx="9" cy="21" r="1"></circle>
+ *          <circle cx="20" cy="21" r="1"></circle>
+ *          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+ *        </svg>
+ *      ),
+ *      needAuthenticate: false,
+ *      dropdown: [
+ *        {
+ *          label: "Electronics",
+ *          path: "/products/electronics",
+ *          icon: (
+ *            <svg
+ *              xmlns="http://www.w3.org/2000/svg"
+ *              width="18"
+ *              height="18"
+ *              viewBox="0 0 24 24"
+ *              fill="none"
+ *              stroke="currentColor"
+ *              strokeWidth="2"
+ *              strokeLinecap="round"
+ *              strokeLinejoin="round"
+ *            >
+ *              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+ *              <rect x="9" y="9" width="6" height="6"></rect>
+ *              <line x1="9" y1="1" x2="9" y2="4"></line>
+ *              <line x1="15" y1="1" x2="15" y2="4"></line>
+ *              <line x1="9" y1="20" x2="9" y2="23"></line>
+ *              <line x1="15" y1="20" x2="15" y2="23"></line>
+ *              <line x1="20" y1="9" x2="23" y2="9"></line>
+ *              <line x1="20" y1="14" x2="23" y2="14"></line>
+ *              <line x1="1" y1="9" x2="4" y2="9"></line>
+ *              <line x1="1" y1="14" x2="4" y2="14"></line>
+ *            </svg>
+ *          ),
+ *        },
+ *        {
+ *          label: "Clothing",
+ *          path: "/products/clothing",
+ *          icon: (
+ *            <svg
+ *              xmlns="http://www.w3.org/2000/svg"
+ *              width="18"
+ *              height="18"
+ *              viewBox="0 0 24 24"
+ *              fill="none"
+ *              stroke="currentColor"
+ *              strokeWidth="2"
+ *              strokeLinecap="round"
+ *              strokeLinejoin="round"
+ *            >
+ *              <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 *2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"></path>
+ *            </svg>
+ *          ),
+ *        },
+ *      ],
+ *    },
+ *    {
+ *      label: "Dashboard",
+ *      icon: (
+ *        <svg
+ *          xmlns="http://www.w3.org/2000/svg"
+ *          width="18"
+ *          height="18"
+ *          viewBox="0 0 24 24"
+ *          fill="none"
+ *          stroke="currentColor"
+ *          strokeWidth="2"
+ *          strokeLinecap="round"
+ *          strokeLinejoin="round"
+ *        >
+ *          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+ *          <line x1="3" y1="9" x2="21" y2="9"></line>
+ *          <line x1="9" y1="21" x2="9" y2="9"></line>
+ *        </svg>
+ *      ),
+ *      path: "/dashboard",
+ *      needAuthenticate: true,
+ *    },
+ *  ];
+ *
+ *  const profileConfig = {
+ *    label: "John Doe",
+ *    onClick: handleProfile,
+ *    icon: (
+ *      <svg
+ *        xmlns="http://www.w3.org/2000/svg"
+ *        width="24"
+ *        height="24"
+ *        viewBox="0 0 24 24"
+ *        fill="none"
+ *        stroke="currentColor"
+ *        strokeWidth="2"
+ *        strokeLinecap="round"
+ *        strokeLinejoin="round"
+ *      >
+ *        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+ *        <circle cx="12" cy="7" r="4"></circle>
+ *      </svg>
+ *    ),
+ *  };
+ *
+ *  <CRNavbar
+ *       orientation="top"
+ *       logo={logoConfig}
+ *       useRouter={false}
+ *       isSticky={true}
+ *       useMenu={true}
+ *       ctaButtons={
+ *         isAuthenticated
+ *           ? [
+ *               {
+ *                 label: "Log Out",
+ *                 onClick: handleLogOut,
+ *                 icon: (
+ *                   <svg
+ *                     xmlns="http://www.w3.org/2000/svg"
+ *                     width="18"
+ *                     height="18"
+ *                     viewBox="0 0 24 24"
+ *                     fill="none"
+ *                     stroke="currentColor"
+ *                     strokeWidth="2"
+ *                     strokeLinecap="round"
+ *                     strokeLinejoin="round"
+ *                   >
+ *                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+ *                     <polyline points="16 17 21 12 16 7"></polyline>
+ *                     <line x1="21" y1="12" x2="9" y2="12"></line>
+ *                   </svg>
+ *                 ),
+ *               },
+ *             ]
+ *           : ctaButtons
+ *       }
+ *       links={links}
+ *       auth={isAuthenticated}
+ *       onlyIcons={true}
+ *       useProfile={isAuthenticated ? profileConfig : null}
+ *     />
+ *
+ *  @typedef {Object} Logo - Representa el logotipo del navbar.
+ *  @property {string} img - URL de la imagen del logotipo.
+ *  @property {string} label - Texto alternativo del logotipo.
+ *  @property {string} size - Clase de tamaño de la imagen.
  * @property {string} path - Ruta de navegación del logotipo.
  *
  * @typedef {Object} Button - Representa un botón de llamada a la acción (CTA).
