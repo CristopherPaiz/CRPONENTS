@@ -36,14 +36,11 @@ git clone https://github.com/CristopherPaiz/CRPONENTS.git
 - CRDrawer
 - CRTabs
 - CRCarousel
-
 - CRSwitch
 - CRDialog
 - CRPagination
-
 - CRRadio
 - CRCheckbox
-
 - CRCard
 - CRTable
 
