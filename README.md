@@ -20,16 +20,19 @@ git clone https://github.com/CristopherPaiz/CRPONENTS.git
 
 ## Componentes incluidos
 
+### Finalizados
+
 - CRInput
 - CRDate
 - CRButton
 - CRSelect
-
 - CRModal
 - CRLoader
 - CRAlert
-
 - CRNavbar
+
+### Pendientes
+
 - CRDrawer
 - CRTabs
 - CRCarousel
