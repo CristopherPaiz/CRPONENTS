@@ -416,37 +416,11 @@ const App = () => {
             <CRTabSelector>Inicio</CRTabSelector>
             <CRTabSelector>Alumnos</CRTabSelector>
             <CRTabSelector>Profesores</CRTabSelector>
-            <CRTabSelector>Inicio</CRTabSelector>
-            <CRTabSelector>Alumnos</CRTabSelector>
-            <CRTabSelector>Profesores</CRTabSelector>
-            <CRTabSelector>Alumnos</CRTabSelector>
-            <CRTabSelector>Profesores</CRTabSelector>
-            <CRTabSelector>Inicio</CRTabSelector>
-            <CRTabSelector>Alumnos</CRTabSelector>
-            <CRTabSelector>Profesores</CRTabSelector>
 
             <CRTabPanel>
               <h1>INICIO</h1>
             </CRTabPanel>
             <CRTabPanel forceUnmount>
-              <Tab1 />
-            </CRTabPanel>
-            <CRTabPanel>
-              <Tab2 />
-            </CRTabPanel>
-            <CRTabPanel>
-              <h1>INICIO</h1>
-            </CRTabPanel>
-            <CRTabPanel>
-              <Tab1 />
-            </CRTabPanel>
-            <CRTabPanel>
-              <Tab2 />
-            </CRTabPanel>
-            <CRTabPanel>
-              <h1>INICIO</h1>
-            </CRTabPanel>
-            <CRTabPanel>
               <Tab1 />
             </CRTabPanel>
             <CRTabPanel>
