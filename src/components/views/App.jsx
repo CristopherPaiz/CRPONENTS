@@ -323,7 +323,7 @@ const App = () => {
 
   // ##### RENDER #####
   return (
-    <div className="w-full h-screen overflow-auto bg-white dark:bg-neutral-800">
+    <div className="w-full h-screen overflow-auto bg-white dark:bg-neutral-800 text-black dark:text-white">
       <CRNavbar
         orientation="top"
         logo={logoConfig}
