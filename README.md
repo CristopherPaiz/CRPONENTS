@@ -30,10 +30,10 @@ git clone https://github.com/CristopherPaiz/CRPONENTS.git
 - CRLoader
 - CRAlert
 - CRNavbar
+- CRTabs
 
 ### Pendientes
 
-- CRTabs
 - CRDrawer
 - CRCarousel
 - CRSwitch
