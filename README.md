@@ -33,8 +33,8 @@ git clone https://github.com/CristopherPaiz/CRPONENTS.git
 
 ### Pendientes
 
-- CRDrawer
 - CRTabs
+- CRDrawer
 - CRCarousel
 - CRSwitch
 - CRDialog

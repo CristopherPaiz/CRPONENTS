@@ -9,6 +9,9 @@ import CRModal from "../UI/CRModal";
 import CRAlert from "../UI/CRAlert";
 import CRLoader from "../UI/CRLoader";
 import CRNavbar from "../UI/CRNavbar";
+import { CRTabPanel, CRTabs, CRTabSelector } from "../UI/CRTabs";
+import Tab1 from "./Extras/Tab1";
+import Tab2 from "./Extras/Tab2";
 
 const App = () => {
   const { theme, setTheme } = useTheme();
@@ -359,7 +362,7 @@ const App = () => {
         onlyIcons={true}
         useProfile={isAuthenticated ? profileConfig : null}
       />
-      <div className="flex flex-col justify-center items-center flex-1 flex-grow p-5">
+      <div className="flex flex-col justify-center items-center flex-1 flex-grow p-5 mb-96">
         <div className="w-full flex justify-end">
           <button className="right-0" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
             {theme === "light" ? "🌙" : "☀️"}
@@ -409,6 +412,47 @@ const App = () => {
           )}
           {selectedItems && console.log(selectedItems)}
           {activateLoader && <CRLoader />}
+          <CRTabs initialTab={1}>
+            <CRTabSelector>Inicio</CRTabSelector>
+            <CRTabSelector>Alumnos</CRTabSelector>
+            <CRTabSelector>Profesores</CRTabSelector>
+            <CRTabSelector>Inicio</CRTabSelector>
+            <CRTabSelector>Alumnos</CRTabSelector>
+            <CRTabSelector>Profesores</CRTabSelector>
+            <CRTabSelector>Alumnos</CRTabSelector>
+            <CRTabSelector>Profesores</CRTabSelector>
+            <CRTabSelector>Inicio</CRTabSelector>
+            <CRTabSelector>Alumnos</CRTabSelector>
+            <CRTabSelector>Profesores</CRTabSelector>
+
+            <CRTabPanel>
+              <h1>INICIO</h1>
+            </CRTabPanel>
+            <CRTabPanel forceUnmount>
+              <Tab1 />
+            </CRTabPanel>
+            <CRTabPanel>
+              <Tab2 />
+            </CRTabPanel>
+            <CRTabPanel>
+              <h1>INICIO</h1>
+            </CRTabPanel>
+            <CRTabPanel>
+              <Tab1 />
+            </CRTabPanel>
+            <CRTabPanel>
+              <Tab2 />
+            </CRTabPanel>
+            <CRTabPanel>
+              <h1>INICIO</h1>
+            </CRTabPanel>
+            <CRTabPanel>
+              <Tab1 />
+            </CRTabPanel>
+            <CRTabPanel>
+              <Tab2 />
+            </CRTabPanel>
+          </CRTabs>
         </div>
       </div>
     </div>
