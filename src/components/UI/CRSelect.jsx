@@ -99,8 +99,8 @@ const CRSelect = ({
       if (matchedItems.length > 0) {
         setSelectedItems(matchedItems);
         setValue && setValue(onlySelectValues ? matchedItems.map((item) => item[valueField]) : matchedItems);
+        setDefaultApplied(true); 
       }
-      setDefaultApplied(true);
     }
   }, [dataLoaded, defaultValue, timeoutExpired, defaultApplied, data, valueField, setValue, onlySelectValues]);
 
@@ -122,7 +122,7 @@ const CRSelect = ({
   useEffect(() => {
     setSelectedItems([]);
     setSearchTerm("");
-    setValue && setValue(multi ? [] : null);
+    if (reset && setValue) setValue(multi ? [] : null);
   }, [reset, setValue, multi]);
 
   useEffect(() => {
