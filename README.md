@@ -31,11 +31,11 @@ git clone https://github.com/CristopherPaiz/CRPONENTS.git
 - CRAlert
 - CRNavbar
 - CRTabs
+- CRCarousel
 
 ### Pendientes
 
 - CRDrawer
-- CRCarousel
 - CRSwitch
 - CRDialog
 - CRPagination

@@ -12,6 +12,7 @@ import CRNavbar from "../UI/CRNavbar";
 import { CRTabPanel, CRTabs, CRTabSelector } from "../UI/CRTabs";
 import Tab1 from "./Extras/Tab1";
 import Tab2 from "./Extras/Tab2";
+import CRCarousel from "../UI/CRCarousel";
 
 const App = () => {
   const { theme, setTheme } = useTheme();
@@ -321,6 +322,29 @@ const App = () => {
     }
   }, [isModalOpen]);
 
+  const carouselData = [
+    {
+      legend: "test1",
+      url: "https://astelus.com/wp-content/uploads/2024/04/preparar-Enchilada.jpg",
+    },
+    {
+      legend: "test2",
+      url: "https://fresqui.com/upload/media/entries/2015-11/18/8-0-04415fa16155f7961b38c807b3bf9902.jpg",
+    },
+    {
+      legend: "test3",
+      url: "https://tipsparatuviaje.com/wp-content/uploads/2019/12/fiambre-gua.jpg",
+    },
+    {
+      legend: "test4",
+      url: "https://elviajerofeliz.com/wp-content/uploads/2020/01/Comida-t%C3%ADpica-de-Colombia-Platos-Imprescindibles.jpg",
+    },
+    {
+      legend: "test5",
+      url: "https://tipsparatuviaje.com/wp-content/uploads/2019/12/empanadas-cordobesas.jpg",
+    },
+  ];
+
   // ##### RENDER #####
   return (
     <div className="w-full h-screen overflow-auto bg-white dark:bg-neutral-800 text-black dark:text-white">
@@ -370,6 +394,22 @@ const App = () => {
         </div>
         <div className="w-full justify-center m-auto sm:w-1/2">
           {/* /////////////////////////////////////// COMPONENTES /////////////////////////////////////// */}
+          <CRTabs initialTab={1}>
+            <CRTabSelector>Inicio</CRTabSelector>
+            <CRTabSelector>Alumnos</CRTabSelector>
+            <CRTabSelector>Profesores</CRTabSelector>
+
+            <CRTabPanel>
+              <h1>INICIO</h1>
+            </CRTabPanel>
+            <CRTabPanel forceUnmount>
+              <Tab1 />
+            </CRTabPanel>
+            <CRTabPanel>
+              <Tab2 />
+            </CRTabPanel>
+          </CRTabs>
+          <CRCarousel data={carouselData} />
           <CRInput title="Nombre" placeholder="Escriba su nombre" setValue={setPrueba} reset={resetear} />
           <CRDate title="Fecha" setValue={setPrueba} reset={resetear} />
           <CRSelect
@@ -412,21 +452,6 @@ const App = () => {
           )}
           {selectedItems && console.log(selectedItems)}
           {activateLoader && <CRLoader />}
-          <CRTabs initialTab={1}>
-            <CRTabSelector>Inicio</CRTabSelector>
-            <CRTabSelector>Alumnos</CRTabSelector>
-            <CRTabSelector>Profesores</CRTabSelector>
-
-            <CRTabPanel>
-              <h1>INICIO</h1>
-            </CRTabPanel>
-            <CRTabPanel forceUnmount>
-              <Tab1 />
-            </CRTabPanel>
-            <CRTabPanel>
-              <Tab2 />
-            </CRTabPanel>
-          </CRTabs>
         </div>
       </div>
     </div>
