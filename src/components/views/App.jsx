@@ -13,6 +13,7 @@ import { CRTabPanel, CRTabs, CRTabSelector } from "../UI/CRTabs";
 import Tab1 from "./Extras/Tab1";
 import Tab2 from "./Extras/Tab2";
 import CRCarousel from "../UI/CRCarousel";
+import CRPagination from "../UI/CRPagination";
 
 const App = () => {
   const { theme, setTheme } = useTheme();
@@ -345,6 +346,9 @@ const App = () => {
     },
   ];
 
+  const [current, setCurrent] = useState(1);
+  const total = 10;
+
   // ##### RENDER #####
   return (
     <div className="w-full h-screen overflow-auto bg-white dark:bg-neutral-800 text-black dark:text-white">
@@ -409,7 +413,7 @@ const App = () => {
               <Tab2 />
             </CRTabPanel>
           </CRTabs>
-          <CRCarousel data={carouselData} />
+          <CRCarousel data={carouselData} height={50} />
           <CRInput title="Nombre" placeholder="Escriba su nombre" setValue={setPrueba} reset={resetear} />
           <CRDate title="Fecha" setValue={setPrueba} reset={resetear} />
           <CRSelect
@@ -433,6 +437,20 @@ const App = () => {
             className="bg-blue-500 text-white"
             onClick={() => setActivateLoader(!activateLoader)}
           />
+
+          <div className="p-4">
+            <CRPagination
+              showFirstLast
+              current={current}
+              total={20}
+              maxElements={5}
+              showArrows={true}
+              setCurrent={setCurrent}
+              color="violet" // o cualquier otro color definido
+              isSinglePage
+            />
+            <p className="mt-4">Página actual: {current}</p>
+          </div>
 
           <CRModal setIsOpen={setIsModalOpen} isOpen={isModalOpen} title="Ejemplo de Modal">
             <div>
