@@ -4,7 +4,7 @@ import { ThemeProvider } from "./context/ThemeProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <>
-    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+    <ThemeProvider defaultTheme="dark" storageKey="theme">
       <App />
     </ThemeProvider>
   </>
