@@ -1,6 +1,82 @@
 import { memo, useRef, useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 
+/**
+ * CRPagination - Componente de paginación personalizable con soporte para diferentes estilos y configuraciones.
+ *
+ * @param {Object} props - Propiedades del componente
+ * @param {boolean} [props.disable=false] - Deshabilita la interacción con el componente
+ * @param {('left'|'center'|'right')} [props.align='center'] - Alineación horizontal del componente
+ * @param {number} props.current - Número de página actual (requerido)
+ * @param {number} [props.total=1] - Número total de páginas
+ * @param {boolean} [props.isSinglePage=false] - Muestra solo un botón cuando hay una única página
+ * @param {boolean} [props.showArrows=true] - Muestra/oculta las flechas de navegación
+ * @param {boolean} [props.showQuickArrow=false] - Muestra/oculta los botones de navegación rápida (primera/última página)
+ * @param {boolean} [props.showFirstLast=false] - Muestra/oculta los números de primera y última página
+ * @param {number} [props.maxElements=5] - Máximo número de elementos de paginación visibles
+ * @param {string} [props.labelArrowLeft='←'] - Símbolo para la flecha izquierda
+ * @param {string} [props.labelArrowRight='→'] - Símbolo para la flecha derecha
+ * @param {Function} props.setCurrent - Función para actualizar la página actual (requerida)
+ * @param {('purple'|'red'|'orange'|'cyan'|'teal'|'white'|'black'|'gray'|'green'|'blue'|'yellow'|'sky'|'violet')} [props.color='gray'] - Color del tema
+ *
+ * @returns {JSX.Element} Retorna el componente de paginación o null si total <= 1
+ *
+ * @example
+ * // Ejemplo básico
+ * function MyComponent() {
+ *   const [currentPage, setCurrentPage] = useState(1);
+ *   return (
+ *     <CRPagination
+ *       current={currentPage}
+ *       total={10}
+ *       setCurrent={setCurrentPage}
+ *     />
+ *   );
+ * }
+ *
+ * @example
+ * // Ejemplo intermedio con configuración personalizada
+ * function MyComponent() {
+ *   const [currentPage, setCurrentPage] = useState(1);
+ *   return (
+ *     <CRPagination
+ *       current={currentPage}
+ *       total={20}
+ *       setCurrent={setCurrentPage}
+ *       color="blue"
+ *       align="left"
+ *       showArrows={true}
+ *       maxElements={7}
+ *       labelArrowLeft="<"
+ *       labelArrowRight=">"
+ *     />
+ *   );
+ * }
+ *
+ * @example
+ * // Ejemplo avanzado con todas las características
+ * function MyComponent() {
+ *   const [currentPage, setCurrentPage] = useState(1);
+ *   return (
+ *     <CRPagination
+ *       current={currentPage}
+ *       total={100}
+ *       setCurrent={setCurrentPage}
+ *       color="purple"
+ *       align="center"
+ *       showArrows={true}
+ *       showQuickArrow={true}
+ *       showFirstLast={true}
+ *       maxElements={9}
+ *       labelArrowLeft="Anterior"
+ *       labelArrowRight="Siguiente"
+ *       disable={isLoading} // Deshabilita durante la carga
+ *     />
+ *   );
+ * }
+ *
+ */
+
 const CRPagination = ({
   disable = false,
   align = "center",

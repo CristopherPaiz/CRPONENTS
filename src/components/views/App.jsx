@@ -446,7 +446,7 @@ const App = () => {
               maxElements={5}
               showArrows={true}
               setCurrent={setCurrent}
-              color="violet" // o cualquier otro color definido
+              color="teal" // o cualquier otro color definido
               isSinglePage
             />
             <p className="mt-4">Página actual: {current}</p>
