@@ -442,7 +442,7 @@ const App = () => {
             <CRPagination
               showFirstLast
               current={current}
-              total={20}
+              total={total}
               maxElements={5}
               showArrows={true}
               setCurrent={setCurrent}
