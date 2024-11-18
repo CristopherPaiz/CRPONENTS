@@ -31,6 +31,7 @@ import PropTypes from "prop-types";
  * @param {string} [props.searchField] - El nombre del campo por el cual se realizar la búsqueda en el menú desplegable. Por defecto es `labelField`.
  * @param {boolean} [props.autoClose=true] - Indica si el menú desplegable se cierra automáticamente al seleccionar una opción. Por defecto es `true`.
  * @param {string} [props.error] - El mensaje de error a mostrar debajo del select.
+ * @param {boolean} [props.keyValue=true] - Indica si el arreglo de opciones es un objeto con llave y valor y no contienen labels para identificar los valores Por defecto es `true`.
  * @param {boolean} [props.onlySelectValues=false] - Indica si solo se deben retornar los valores de las opciones seleccionadas. Por defecto es `false`.
  * @returns {JSX.Element} - El componente select.
  *
@@ -80,6 +81,7 @@ const CRSelect = ({
   autoClose = true,
   error = "",
   onlySelectValues = false,
+  keyValue = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -99,17 +101,27 @@ const CRSelect = ({
       if (matchedItems.length > 0) {
         setSelectedItems(matchedItems);
         setValue && setValue(onlySelectValues ? matchedItems.map((item) => item[valueField]) : matchedItems);
-        setDefaultApplied(true); 
+        setDefaultApplied(true);
       }
     }
   }, [dataLoaded, defaultValue, timeoutExpired, defaultApplied, data, valueField, setValue, onlySelectValues]);
 
   useEffect(() => {
     if (data.length > 0) {
-      setFilteredData(data);
+      let formattedData = data;
+
+      if (keyValue) {
+        // Si keyValue es true, transforma el objeto a la estructura esperada
+        formattedData = Object.entries(data[0]).map(([label, value]) => ({
+          [labelField]: label + " (" + value + ")",
+          [valueField]: value,
+        }));
+      }
+
+      setFilteredData(formattedData);
       setDataLoaded(true);
     }
-  }, [data]);
+  }, [data, keyValue, labelField, valueField]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -164,7 +176,7 @@ const CRSelect = ({
     const term = e.target.value;
     setSearchTerm(term);
     const filtered = data.filter((item) => {
-      const itemValue = item[searchField || labelField].toLowerCase();
+      const itemValue = item[labelField || searchField].toLowerCase();
       const searchValue = term.toLowerCase();
 
       if (insensitive) {
@@ -355,6 +367,7 @@ CRSelect.propTypes = {
   autoClose: PropTypes.bool,
   error: PropTypes.string,
   onlySelectValues: PropTypes.bool,
+  keyValue: PropTypes.bool,
 };
 
 export default CRSelect;
