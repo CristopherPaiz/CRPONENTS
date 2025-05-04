@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
  * @param {Object} props - Las propiedades del componente.
  * @param {'horizontal'|'vertical'} [props.orientation] - Orientación del carrusel
  * @param {number} [props.widthPercentage] - Ancho del carrusel como porcentaje del contenedor
+ * @param {string|number} [props.heightPercentage] - Altura del carrusel como porcentaje o valor dvh (ej: 100, "100dvh")
  * @param {boolean} [props.infiniteLoop] - Permite la navegación infinita del carrusel
  * @param {boolean} [props.lazy] - Activa la carga perezosa de imágenes
  * @param {'contain'|'cover'|'fill'} [props.contentFit] - Modo de ajuste de las imágenes
@@ -102,6 +103,7 @@ const CRCarousel = ({
   data = [],
   orientation = "horizontal",
   widthPercentage = 100,
+  heightPercentage = null,
   infiniteLoop = true,
   lazy = true,
   contentFit = "cover",
@@ -290,7 +292,10 @@ const CRCarousel = ({
       <div
         ref={containerRef}
         className="relative overflow-hidden"
-        style={{ height: `${height}px`, width: "100%" }}
+        style={{
+          height: height && !heightPercentage ? `${height}px` : `${heightPercentage}${heightPercentage.toString().includes("dvh", "vh") ? "" : "%"}`,
+          width: "100%",
+        }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onTouchStart={onTouchStart}
@@ -318,7 +323,9 @@ const CRCarousel = ({
                   transitionMode === "slide"
                     ? {
                         transform:
-                          orientation === "horizontal" ? `translateX(${(index - currentIndex) * 100}%)` : `translateY(${(index - currentIndex) * 100}%)`,
+                          orientation === "horizontal"
+                            ? `translateX(${(index - currentIndex) * 100}%)`
+                            : `translateY(${(index - currentIndex) * 100}%)`,
                       }
                     : {}
                 }
@@ -417,6 +424,7 @@ CRCarousel.propTypes = {
   ).isRequired,
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
   widthPercentage: PropTypes.number,
+  heightPercentage: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   infiniteLoop: PropTypes.bool,
   lazy: PropTypes.bool,
   contentFit: PropTypes.oneOf(["contain", "cover", "fill"]),

@@ -51,7 +51,7 @@ const CRButton = ({
 
   const buttonClasses = `
   flex items-center justify-center px-4 py-3 rounded-md
-  transition-all duration-300 ease-in-out my-2
+  transition-all duration-300 ease-in-out my-2 cursor-pointer
   ${disable || loading ? "opacity-50" : isHovered ? "opacity-80" : ""}
   ${className || "bg-blue-500 text-white"}
 `;
